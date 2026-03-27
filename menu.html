@@ -100,6 +100,69 @@
     <div class="shop-container">
         <!-- Sidebar -->
         <aside class="sidebar">
+            /* Add this to your <style> section */
+
+.sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    z-index: 10;
+}
+
+.category-list {
+    list-style: none;
+}
+
+.category-item {
+    padding: 14px 20px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.category-item:hover, .category-item.active {
+    background: var(--sky-blue);
+    color: var(--black);
+}
+
+/* Mobile Optimization */
+@media (max-width: 1100px) {
+    .shop-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .sidebar {
+        position: static;           /* No more sticky on mobile */
+        height: auto;
+        order: -1;                  /* Categories appear first */
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    
+    .category-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .category-item {
+        flex: 1 1 45%;              /* Two columns on mobile */
+        min-width: 140px;
+        margin-bottom: 0;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.95rem;
+        padding: 14px 12px;
+    }
+}
             <ul class="category-list" id="category-list">
                 <li class="category-item active" data-category="starters"><i class="fas fa-utensils"></i> Starters & Sides</li>
                 <li class="category-item" data-category="mains"><i class="fas fa-drumstick-bite"></i> Main Courses</li>
