@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Mobmat Restaurant - Authentic Ghanaian Flavours</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sky-blue: #9cd5ff;
+            --deep-red: #9b0f06;
+            --warm-orange: #f39c12;
+            --white: #ffffff;
+            --black: #000000;
+            --fresh-green: #2ecc71;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--white); color: var(--black); line-height: 1.6; }
+        
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%; border-bottom: 1px solid #eee;
+            position: sticky; top: 0; background: white; z-index: 1000;
+        }
+        .logo { font-weight: bold; color: var(--deep-red); text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 1.5rem; }
+        .nav-links a { text-decoration: none; color: #333; margin: 0 15px; font-weight: 500; }
+        .nav-links a:hover { color: var(--deep-red); }
+        .btn-order { background: var(--deep-red); color: white; padding: 10px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+
+        .shop-container {
+            display: grid; grid-template-columns: 260px 1fr 320px; gap: 30px;
+            padding: 40px 5%; max-width: 1400px; margin: 0 auto;
+        }
+        .sidebar { position: sticky; top: 100px; height: fit-content; }
+        .category-list { list-style: none; }
+        .category-item {
+            padding: 14px 20px; margin-bottom: 8px; border-radius: 8px;
+            cursor: pointer; display: flex; align-items: center; gap: 12px;
+            font-weight: 500; transition: 0.3s;
+        }
+        .category-item:hover, .category-item.active { background: var(--sky-blue); color: var(--black); }
+
+        .product-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
+        }
+        .product-card {
+            background: #fff; border: 1px solid #eee; border-radius: 12px;
+            overflow: hidden; transition: 0.3s;
+        }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+        .product-img {
+            width: 100%; height: 210px; background-size: cover; background-position: center;
+        }
+        .product-info { padding: 18px; }
+        .price { font-weight: bold; color: var(--deep-red); font-size: 1.25rem; }
+        .btn-add {
+            background: var(--deep-red); color: white; border: none;
+            padding: 11px; border-radius: 6px; font-weight: bold;
+            cursor: pointer; width: 100%; margin-top: 12px;
+        }
+        .btn-add:hover { background: #c41e14; }
+
+        .cart-box {
+            border: 1px solid #eee; border-radius: 12px; padding: 25px; background: white;
+        }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .cart-items { max-height: 420px; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .btn-checkout {
+            background: var(--deep-red); color: white; border: none;
+            padding: 14px; width: 100%; border-radius: 8px; font-weight: bold;
+            margin-top: 15px; cursor: pointer;
+        }
+        .promo-banner {
+            background: linear-gradient(135deg, var(--deep-red), #c41e14);
+            color: white; padding: 50px 40px; border-radius: 20px;
+            margin: 60px 5%; display: flex; justify-content: space-between; align-items: center;
+        }
+        @media (max-width: 1100px) {
+            .shop-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-utensils"></i> Mobmat</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html" style="color: var(--deep-red)">Menu</a>
+            <a href="about.html">Why Us</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <i class="fas fa-shopping-cart" id="cart-icon" style="font-size: 1.5rem; cursor: pointer;"></i>
+            <a href="#" id="order-now-btn" class="btn-order">Order Now</a>
+        </div>
+    </nav>
+
+    <div class="shop-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="category-list" id="category-list">
+                <li class="category-item active" data-category="starters"><i class="fas fa-utensils"></i> Starters & Sides</li>
+                <li class="category-item" data-category="mains"><i class="fas fa-drumstick-bite"></i> Main Courses</li>
+                <li class="category-item" data-category="rice"><i class="fas fa-bowl-rice"></i> Jollof & Rice Dishes</li>
+                <li class="category-item" data-category="swallow"><i class="fas fa-utensils"></i> Banku & Swallow</li>
+                <li class="category-item" data-category="drinks"><i class="fas fa-coffee"></i> Drinks & Extras</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="menu-content">
+            <h2 id="section-title">Starters & Sides</h2>
+            <p style="color: #666; margin-bottom: 30px;">Fresh Ghanaian starters made with local ingredients</p>
+            <div class="product-grid" id="product-grid"></div>
+        </main>
+
+        <!-- Cart -->
+        <aside>
+            <div class="cart-box">
+                <div class="cart-header">
+                    <span style="font-weight: bold; font-size: 1.3rem;">Your Order</span>
+                    <span id="cart-count" style="background: #eef8ff; padding: 5px 14px; border-radius: 20px; font-size: 0.9rem;">0 items</span>
+                </div>
+                <div id="cart-items" class="cart-items"></div>
+                <div id="cart-total" style="display: none; margin-top: 20px; font-weight: bold; font-size: 1.2rem;">
+                    Total: GH₵<span id="total-price">0.00</span>
+                </div>
+                <button id="checkout-btn" class="btn-checkout" style="display: none;">Proceed to Checkout</button>
+                <div id="empty-cart" style="text-align: center; padding: 50px 20px; color: #888;">
+                    <i class="fas fa-shopping-bag" style="font-size: 3.5rem; color: #ddd; margin-bottom: 15px;"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Promo -->
+    <section class="promo-banner">
+        <div>
+            <h2 style="margin-bottom: 10px;">Order GH₵150+ & Get Free Delivery!</h2>
+            <p>Plus free Kelewele on your first order this week 🇬🇭</p>
+        </div>
+        <a href="#" id="grab-deal-btn" style="background: white; color: var(--deep-red); padding: 15px 35px; border-radius: 8px; text-decoration: none; font-weight: bold;">Grab This Deal</a>
+    </section>
+
+    <footer style="padding: 80px 5% 30px; background: #f9f9f9; text-align: center; border-top: 1px solid #eee;">
+        <p>&copy; 2026 Mobmat Restaurant Ghana. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        const menuData = {
+            starters: [
+                { name: "Spicy Kelewele", price: 28, img: "./images/Spicy Kelewele.jpg", desc: "Sweet ripe plantains fried with ginger, pepper & spices" },
+                { name: "Fried Yam & Shito", price: 32, img: "./images/fried yam.jpg", desc: "Crispy yam slices served with hot black pepper sauce" },
+                { name: "Chichinga (Beef Kebab)", price: 25, img: "./images/chichinga_1.png", desc: "Grilled spicy beef skewers with peanut seasoning" }
+            ],
+            mains: [
+                { name: "Red Red with Plantain", price: 38, img: "./images/red red.jpg", desc: "Black-eyed beans stew in red palm oil with fried ripe plantain" },
+                { name: "Waakye Special", price: 55, img: "./images/Waakye Special.jpg", desc: "Rice & beans with spaghetti, egg, meat, gari & shito" },
+                { name: "Fufu + Chicken Light Soup", price: 65, img: "./images/fufu and chicken.jpg", desc: "Soft pounded fufu served with spicy chicken light soup" }   // Added as requested
+            ],
+            rice: [
+                { name: "Classic Jollof Rice + Grilled Chicken", price: 58, img: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "Smoky Ghanaian jollof with tender grilled chicken" },
+                { name: "Jollof with Fried Fish", price: 60, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80", desc: "Party-style jollof served with crispy fried fish" }
+            ],
+            swallow: [
+                { name: "Banku + Grilled Tilapia", price: 68, img: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Grilled_tilapia_with_banku.jpg", desc: "Fermented banku with hot grilled tilapia & pepper sauce" },
+                { name: "Omo Tuo + Groundnut Soup", price: 65, img: "./images/Omo Tuo + Groundnut Soup.jpg", desc: "Rice balls in rich peanut soup with chicken" }
+            ],
+            drinks: [
+                { name: "Fresh Ginger Drink", price: 12, img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80", desc: "Spicy homemade ginger with pineapple" },
+                { name: "Sobolo (Hibiscus)", price: 12, img: "./images/sobolo.jpg", desc: "Chilled refreshing hibiscus drink" },
+                { name: "Brukina (Millet Drink)", price: 18, img: "./images/Brukina (Millet Drink).jpg", desc: "Creamy fermented millet drink with milk" }
+            ]
+        };
+
+        function renderProducts(category) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            menuData[category].forEach(item => {
+                const cardHTML = `
+                    <div class="product-card">
+                        <div class="product-img" style="background-image: url('${item.img}')"></div>
+                        <div class="product-info">
+                            <h3>${item.name}</h3>
+                            <p style="font-size: 0.9rem; color: #666; margin: 8px 0 12px;">${item.desc}</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="price">GH₵${item.price}</span>
+                                <button class="btn-add" data-name="${item.name}" data-price="${item.price}">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+            attachAddToCartListeners();
+        }
+
+        function attachAddToCartListeners() {
+            document.querySelectorAll('.btn-add').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const name = btn.getAttribute('data-name');
+                    const price = parseFloat(btn.getAttribute('data-price'));
+
+                    const existing = cart.find(i => i.name === name);
+                    if (existing) existing.quantity += 1;
+                    else cart.push({ name, price, quantity: 1 });
+
+                    updateCart();
+
+                    const origText = btn.textContent;
+                    btn.textContent = 'Added ✓';
+                    btn.style.background = '#2ecc71';
+                    setTimeout(() => {
+                        btn.textContent = origText;
+                        btn.style.background = 'var(--deep-red)';
+                    }, 1400);
+                });
+            });
+        }
+
+        function updateCart() {
+            const container = document.getElementById('cart-items');
+            const empty = document.getElementById('empty-cart');
+            const totalSec = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const countEl = document.getElementById('cart-count');
+            const totalPriceEl = document.getElementById('total-price');
+
+            container.innerHTML = '';
+            if (cart.length === 0) {
+                empty.style.display = 'block';
+                totalSec.style.display = 'none';
+                checkoutBtn.style.display = 'none';
+                countEl.textContent = '0 items';
+                return;
+            }
+
+            empty.style.display = 'none';
+            totalSec.style.display = 'block';
+            checkoutBtn.style.display = 'block';
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>GH₵${item.price} × ${item.quantity}</small>
+                        </div>
+                        <div style="text-align:right;">
+                            <strong>GH₵${itemTotal}</strong><br>
+                            <button onclick="removeFromCart(${index})" style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:0.85rem;">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            totalPriceEl.textContent = total.toFixed(2);
+            countEl.textContent = `${cart.length} item${cart.length > 1 ? 's' : ''}`;
+        }
+
+        window.removeFromCart = function(index) {
+            cart.splice(index, 1);
+            updateCart();
+        };
+
+        // Category clicks
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                const cat = item.getAttribute('data-category');
+                document.getElementById('section-title').textContent = item.textContent.trim();
+                renderProducts(cat);
+            });
+        });
+
+        // Button handlers
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            if (cart.length > 0) {
+                const total = document.getElementById('total-price').textContent;
+                alert(`🎉 Order placed successfully!\nTotal: GH₵${total}\n\nYour authentic Ghanaian meal will be delivered hot in ~25 minutes. Thank you! 🇬🇭`);
+                cart = [];
+                updateCart();
+            }
+        });
+
+        document.getElementById('order-now-btn').addEventListener('click', e => { e.preventDefault(); alert("Quick checkout opening... 🛵"); });
+        document.getElementById('grab-deal-btn').addEventListener('click', e => { e.preventDefault(); alert("✅ Free delivery activated for orders over GH₵150!"); });
+        document.getElementById('cart-icon').addEventListener('click', () => {
+            alert(`You have ${cart.length} item(s) in your cart.`);
+        });
+
+        // Initialize
+        renderProducts('starters');
+        updateCart();
+    </script>
+</body>
+</html>

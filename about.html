@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Us | Mobmat Restaurant - Proudly Ghanaian</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sky-blue: #9cd5ff;
+            --deep-red: #9b0f06;
+            --warm-orange: #f39c12;
+            --white: #ffffff;
+            --black: #000000;
+            --text-gray: #555555;
+            --light-bg: #fdfdfd;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body { 
+            background-color: var(--white); 
+            color: var(--black); 
+            line-height: 1.6; 
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: white;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-weight: bold;
+            color: var(--deep-red);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        .nav-links a:hover { color: var(--deep-red); }
+        .btn-order {
+            background: var(--deep-red);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero */
+        .about-hero {
+            padding: 100px 5% 80px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('./images/space.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        .about-hero span {
+            color: var(--warm-orange);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+        }
+        .about-hero h1 {
+            font-size: 3.2rem;
+            margin: 20px 0 15px;
+        }
+
+        /* Feature Rows */
+        .feature-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            margin-bottom: 110px;
+        }
+        .feature-row:nth-child(even) { flex-direction: row-reverse; }
+        .feature-image {
+            flex: 1;
+            position: relative;
+        }
+        .feature-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .feature-badge {
+            position: absolute;
+            bottom: -25px;
+            right: -25px;
+            width: 90px;
+            height: 90px;
+            background-color: var(--deep-red);
+            border: 6px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(155,15,6,0.3);
+        }
+        .feature-content { flex: 1; }
+        .mobmat-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--deep-red);
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        .mobmat-label::before {
+            content: "";
+            width: 35px;
+            height: 3px;
+            background: var(--warm-orange);
+        }
+        .feature-content h2 {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .feature-content p {
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        .check-list {
+            list-style: none;
+        }
+        .check-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 1.02rem;
+        }
+        .check-list i {
+            color: #2ecc71;
+            font-size: 1.3rem;
+        }
+
+        /* Chefs Section */
+        .chefs-section {
+            background: #f9f9f9;
+            padding: 90px 5%;
+        }
+        .chefs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chef-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .chef-card:hover {
+            transform: translateY(-10px);
+        }
+        .chef-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+        .chef-info {
+            padding: 20px;
+            text-align: center;
+        }
+        .chef-info h3 {
+            color: var(--deep-red);
+            margin-bottom: 5px;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--deep-red);
+            color: white;
+            text-align: center;
+            padding: 90px 5%;
+        }
+        .cta-section h2 {
+            font-size: 2.6rem;
+            margin-bottom: 15px;
+        }
+        .btn-cta {
+            background: white;
+            color: var(--deep-red);
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .btn-cta:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 900px) {
+            .feature-row, .feature-row:nth-child(even) { 
+                flex-direction: column; 
+                gap: 50px; 
+            }
+            .about-hero h1 { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-utensils"></i> Mobmat</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html" style="color: var(--deep-red)">Why Us</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <a href="menu.html" class="btn-order">Order Now</a>
+    </nav>
+
+    <header class="about-hero">
+        <span>Proudly Ghanaian • Since 2024</span>
+        <h1>Why Food Lovers <span style="color:var(--warm-orange);">Choose Mobmat</span></h1>
+        <p style="max-width: 700px; margin: 0 auto 30px; font-size: 1.15rem;">
+            From farm to your door — authentic Ghanaian flavors prepared with love and delivered fast.
+        </p>
+    </header>
+
+    <section class="feature-container">
+        <div class="feature-row">
+            <div class="feature-image">
+                <img src="./images/logo.jpeg" alt="Ghanaian Chef">
+                <div class="feature-badge"><i class="fas fa-award"></i></div>
+            </div>
+            <div class="feature-content">
+                <div class="mobmat-label">The Mobmat Way</div>
+                <h2>Uncompromising Quality</h2>
+                <p>We use only the freshest local ingredients sourced directly from Ghanaian farmers. Every dish is prepared fresh daily using traditional recipes passed down through generations.</p>
+                <ul class="check-list">
+                    <li><i class="far fa-check-circle"></i> Premium Grade-A local ingredients</li>
+                    <li><i class="far fa-check-circle"></i> Hand-selected meats and fresh produce</li>
+                    <li><i class="far fa-check-circle"></i> Made-from-scratch sauces and marinades</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-row">
+            <div class="feature-image">
+                <img src="./images/space.jpg" alt="Fast Delivery">
+                <div class="feature-badge"><i class="fas fa-bolt"></i></div>
+            </div>
+            <div class="feature-content">
+                <div class="mobmat-label">Lightning Fast</div>
+                <h2>25-Minute Delivery</h2>
+                <p>Our optimized kitchen and dedicated riders ensure your hot Ghanaian meal arrives fresh and steaming — usually within 25 minutes in KNUST.</p>
+                <ul class="check-list">
+                    <li><i class="far fa-check-circle"></i> Real-time order tracking</li>
+                    <li><i class="far fa-check-circle"></i> Temperature-controlled delivery</li>
+                    <li><i class="far fa-check-circle"></i> No compromise on taste or quality</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-row">
+            <div class="feature-image">
+                <img src="./images/farms.jpg" alt="Local Farms">
+                <div class="feature-badge"><i class="fas fa-leaf"></i></div>
+            </div>
+            <div class="feature-content">
+                <div class="mobmat-label">Community First</div>
+                <h2>Supporting Local Farmers</h2>
+                <p>Over 80% of our ingredients come from Ghanaian family farms. We believe in building strong communities while delivering the best taste to your table.</p>
+                <ul class="check-list">
+                    <li><i class="far fa-check-circle"></i> Supporting 20+ local farmers & suppliers</li>
+                    <li><i class="far fa-check-circle"></i> Sustainable and eco-friendly packaging</li>
+                    <li><i class="far fa-check-circle"></i> Reducing food miles for fresher meals</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet Our Chefs -->
+    <section class="chefs-section">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto 60px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Meet Our Chefs</h2>
+            <p style="color: var(--text-gray);">Masters of Ghanaian cuisine with decades of experience</p>
+        </div>
+        <div class="chefs-grid">
+            <div class="chef-card">
+                <img src="./images/first woman.jpg" alt="Chef Akosua">
+                <div class="chef-info">
+                    <h3>Chef joyce Boateng </h3>
+                    <p>Head Chef • 18 years experience in traditional Ghanaian cooking</p>
+                </div>
+            </div>
+            <div class="chef-card">
+                <img src="./images/2nd woman.jpg" alt="Chef Markinsen Kwakye">
+                <div class="chef-info">
+                    <p>Grill & Banku Specialist • Known for perfect tilapia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to Taste the Difference?</h2>
+        <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px;">
+            Join thousands of happy customers enjoying authentic Ghanaian meals delivered hot to their door.
+        </p>
+        <a href="menu.html" class="btn-cta">Order Now • Save 15% on First Order</a>
+    </section>
+
+    <footer style="text-align: center; padding: 60px 5% 30px; background: #f9f9f9; border-top: 1px solid #eee;">
+        <p>&copy; 2026 Mobmat Restaurant Ghana. All rights reserved. 🇬🇭</p>
+    </footer>
+
+</body>
+</html>

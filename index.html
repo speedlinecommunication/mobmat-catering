@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobmat Restaurant | Taste Ghana, Delivered Fast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sky-blue: #9cd5ff;
+            --deep-red: #9b0f06;
+            --warm-orange: #f39c12;
+            --white: #ffffff;
+            --black: #000000;
+            --fresh-green: #2ecc71;
+            --overlay: rgba(0, 0, 0, 0.55);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.6rem;
+            color: var(--deep-red);
+            text-decoration: none;
+        }
+        .logo i { margin-right: 10px; color: var(--warm-orange); }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--deep-red); }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.4rem;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--warm-orange);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-order {
+            background-color: var(--deep-red);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(var(--overlay), var(--overlay)),
+                        url('https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 4.2rem;
+            max-width: 850px;
+            margin-bottom: 20px;
+            line-height: 1.05;
+        }
+        .hero h1 span { color: var(--sky-blue); }
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin-bottom: 35px;
+            opacity: 0.95;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 16px 42px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background-color: var(--deep-red);
+            color: white;
+        }
+        .btn-primary:hover { background: #c41e14; transform: translateY(-3px); }
+        .btn-secondary {
+            border: 2px solid var(--white);
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 60px 5%;
+            background-color: #f9f9f9;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 280px;
+        }
+        .feature-item i {
+            font-size: 2.4rem;
+            color: var(--sky-blue);
+        }
+
+        /* Specials */
+        .specials {
+            padding: 90px 5%;
+        }
+        .specials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 45px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .menu-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+            transition: transform 0.4s ease;
+        }
+        .menu-card:hover {
+            transform: translateY(-10px);
+        }
+        .card-img {
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--deep-red);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .card-content {
+            padding: 25px;
+        }
+        .price {
+            color: var(--deep-red);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .btn-select {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            background: var(--deep-red);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn-select:hover {
+            background: #c41e14;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 70px 5%;
+            background-color: #fcfdfe;
+            text-align: center;
+        }
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .category-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 14px;
+            padding: 45px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .category-card:hover {
+            border-color: var(--sky-blue);
+            box-shadow: 0 15px 30px rgba(156, 213, 255, 0.25);
+            transform: translateY(-8px);
+        }
+        .category-icon {
+            width: 65px;
+            height: 65px;
+            background: #fff5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--deep-red);
+            font-size: 1.8rem;
+        }
+        .category-card:hover .category-icon {
+            background: var(--sky-blue);
+            color: white;
+        }
+
+        /* Why Us */
+        .why-us {
+            padding: 110px 5%;
+            display: flex;
+            align-items: center;
+            gap: 70px;
+            max-width: 1300px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        .why-us-image img {
+            width: 100%;
+            border-radius: 16px;
+        }
+        .stats-card {
+            position: absolute;
+            bottom: 35px;
+            left: -25px;
+            background: white;
+            padding: 22px 35px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border-left: 6px solid var(--deep-red);
+        }
+
+        /* CTA */
+        .cta-section {
+            background-color: var(--deep-red);
+            padding: 90px 5%;
+            text-align: center;
+            color: white;
+        }
+        .btn-cta-white {
+            background: white;
+            color: var(--deep-red);
+            padding: 18px 48px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.15rem;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            padding: 90px 5% 30px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+            gap: 45px;
+            max-width: 1250px;
+            margin: 0 auto 70px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 420px;
+        }
+        .close {
+            float: right;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions .btn-order { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .features { flex-direction: column; }
+            .why-us { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fas fa-utensils"></i> Mobmat
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html">Why Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="cart-icon" onclick="showCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <a href="menu.html" class="btn-order">Order Now</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Taste Ghana <span>at Its Finest</span></h1>
+        <p>Authentic local flavors — Jollof, Banku & Tilapia, Waakye, Grilled Fish & more. Delivered hot in KNUST within 25 minutes.</p>
+        <div class="hero-btns">
+            <a href="menu.html" class="btn-primary">Order Now</a>
+            <a href="menu.html" class="btn-secondary">View Menu</a>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="feature-item">
+            <i class="far fa-clock"></i>
+            <div class="feature-text">
+                <h4>25 Min Delivery</h4>
+                <p>Fastest in Accra & Kumasi</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="far fa-leaf" style="color: var(--fresh-green);"></i>
+            <div class="feature-text">
+                <h4>Fresh Local Ingredients <span class="badge-organic" style="background:var(--fresh-green)">Organic</span></h4>
+                <p>Sourced from Ghanaian farms</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-hat-chef"></i>
+            <div class="feature-text">
+                <h4>Proudly Ghanaian Chefs</h4>
+                <p>Mastering traditional recipes</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specials" id="specials">
+        <div class="specials-header">
+            <div>
+                <h2>Weekly Specials</h2>
+                <p>Our most loved Ghanaian dishes — limited time only</p>
+            </div>
+            <a href="menu.html" style="color:var(--deep-red); font-weight:600;">Explore Full Menu <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="card-img" style="background-image: url('https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
+                    <span class="tag">Best Seller</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>Jollof Rice + Grilled Chicken</h3>
+                        <span class="price">GH₵42.00</span>
+                    </div>
+                    <p class="card-desc">Smoky party-style jollof with tender grilled chicken, shito & coleslaw.</p>
+                    <a href="#" class="btn-select" onclick="addToCart('Jollof Rice + Grilled Chicken', 42)">Add to Cart</a>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/bf/Grilled_tilapia_with_banku.jpg');">
+                    <span class="tag">Chef's Pick</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>Banku + Grilled Tilapia</h3>
+                        <span class="price">GH₵48.00</span>
+                    </div>
+                    <p class="card-desc">Fresh fermented banku served with hot grilled tilapia & pepper sauce.</p>
+                    <a href="#" class="btn-select" onclick="addToCart('Banku + Grilled Tilapia', 48)">Add to Cart</a>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-img" style="background-image: url('./images/Waakye\ Special.jpg');">
+                </div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>Waakye Special</h3>
+                        <span class="price">GH₵35.00</span>
+                    </div>
+                    <p class="card-desc">Classic waakye with spaghetti, gari, egg, meat & shito.</p>
+                    <a href="#" class="btn-select" onclick="addToCart('Waakye Special', 35)">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2>Cravings by Category</h2>
+        <p>Traditional Ghanaian favorites made with love</p>
+        <div class="category-grid">
+            <a href="menu.html" class="category-card">
+                <div class="category-icon"><i class="fas fa-bowl-rice"></i></div>
+                <span>Jollof & Rice</span>
+            </a>
+            <a href="menu.html" class="category-card">
+                <div class="category-icon"><i class="fas fa-utensils"></i></div>
+                <span>Banku & Swallow</span>
+            </a>
+            <a href="menu.html" class="category-card">
+                <div class="category-icon"><i class="fas fa-leaf"></i></div>
+                <span>Stews & Soups</span>
+            </a>
+            <a href="menu.html" class="category-card">
+                <div class="category-icon"><i class="fas fa-glass-martini-alt"></i></div>
+                <span>Drinks & Sides</span>
+            </a>
+        </div>
+    </section>
+        <div class="why-us-content">
+            <span class="badge-small" style="background:var(--warm-orange); color:white;">Proudly Ghanaian</span>
+            <h2>Why Food Lovers <span>Choose Mobmat</span></h2>
+            <p>We bring the best of Ghanaian chop bar flavors straight to your door — fresh, hot, and authentic.</p>
+            <a href="about.html" class="btn-learn" style="background:var(--deep-red); color:white; padding:15px 35px; border-radius:8px; text-decoration:none; display:inline-block;">Learn Our Story</a>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready for Real Ghanaian Taste?</h2>
+        <p>First order gets free kelewele or chilled drink!</p>
+        <a href="menu.html" class="btn-cta-white">Order Now & Save 15%</a>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col footer-about">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-utensils"></i> Mobmat
+                </a>
+                <p>Authentic Ghanaian cuisine delivered fast across KNUST. From our kitchen to your table in 25 minutes.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links" style="list-style:none; margin-top:15px;">
+                    <li><a href="menu.html" style="color:#666; text-decoration:none;">Menu</a></li>
+                    <li><a href="about.html" style="color:#666; text-decoration:none;">Why Us</a></li>
+                    <li><a href="contact.html" style="color:#666; text-decoration:none;">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col contact-info">
+                <h4>Contact</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Accra & Kumasi</p>
+                <p><i class="fas fa-phone"></i> 020 316 9595</p>
+                <p><i class="fas fa-envelope"></i>mobmatrestaurant@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>Join Our Newsletter</h4>
+                <p style="font-size:0.85rem; color:#666; margin:12px 0 10px;">Get weekly specials & offers</p>
+                <form id="newsletterForm" style="display:flex; gap:10px;">
+                    <input type="email" id="newsletterEmail" placeholder="Your email" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:6px;">
+                    <button type="submit" class="btn-join">Join</button>
+                </form>
+            </div>
+        </div>
+        <div style="text-align:center; padding-top:30px; border-top:1px solid #eee; color:#888;">
+            &copy; 2026 Mobmat Restaurant Ghana. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Quick Order</h2>
+            <p>Enter your details and we'll deliver in ~25 mins</p>
+            <form style="margin-top:20px;">
+                <input type="text" placeholder="Full Name" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <input type="tel" placeholder="Phone Number" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <input type="text" placeholder="Delivery Address" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <button type="button" onclick="placeOrder()" style="width:100%; padding:14px; background:var(--deep-red); color:white; border:none; border-radius:6px; margin-top:15px; font-weight:bold;">Place Order Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(itemName, price) {
+            cart.push({name: itemName, price: price});
+            document.getElementById('cart-count').textContent = cart.length;
+            alert(`${itemName} added to cart! 🇬🇭`);
+        }
+
+        function showCart() {
+            if (cart.length === 0) {
+                alert("Your cart is empty. Start adding some delicious Ghanaian dishes!");
+                return;
+            }
+            let message = "Items in cart:\n";
+            let total = 0;
+            cart.forEach(item => {
+                message += `- ${item.name} (GH₵${item.price})\n`;
+                total += item.price;
+            });
+            message += `\nTotal: GH₵${total}`;
+            alert(message);
+        }
+
+        function showOrderModal() {
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        function placeOrder() {
+            alert("🎉 Order placed successfully! Your food will be delivered in approximately 25 minutes. Thank you for choosing Mobmat!");
+            cart = [];
+            document.getElementById('cart-count').textContent = '0';
+            closeModal();
+        }
+
+        // Newsletter Form
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            if (email) {
+                alert("Thank you! You've been added to our newsletter. Get ready for weekly specials! 🇬🇭");
+                this.reset();
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('orderModal');
+            if (event.target === modal) closeModal();
+        };
+    </script>
+</body>
+</html>
