@@ -6,6 +6,53 @@
     <title>Menu | Mobmat Restaurant - Authentic Ghanaian Flavours</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* Mobile-friendly layout - This fixes the overlapping */
+@media (max-width: 1100px) {
+    .shop-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 20px 5%;
+    }
+
+    /* Make sidebar normal flow, no sticky at all on mobile */
+    .sidebar {
+        position: static !important;
+        height: auto;
+        order: -1;                    /* Categories appear first */
+        background: #fff;
+        padding: 20px 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+        margin-bottom: 30px;
+    }
+
+    /* Turn categories into nice horizontal/ wrap tabs */
+    .category-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .category-item {
+        flex: 1 1 48%;
+        margin-bottom: 0;
+        padding: 14px 12px;
+        font-size: 0.95rem;
+        justify-content: center;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* Extra safety so nothing overlaps */
+    main#menu-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+}
         :root {
             --sky-blue: #9cd5ff;
             --deep-red: #9b0f06;
